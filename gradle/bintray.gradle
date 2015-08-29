@@ -1,0 +1,25 @@
+apply plugin: 'com.jfrog.bintray'
+
+bintray {
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_KEY')
+    configurations = ['archives']
+    pkg {
+        repo = 'maven'
+        userOrg = 'jtwig'
+        name = 'jtwig-render-extension'
+        desc = 'Jtwig : Modern Template Engine for Java'
+        websiteUrl = 'http://www.jtwig.org'
+        issueTrackerUrl = 'https://github.com/jtwig/jtwig-render-extension/issues'
+        vcsUrl = 'https://github.com/jtwig/jtwig-render-extension.git'
+        licenses = ['Apache-2.0']
+        labels = ['java', 'templates', 'jtwig']
+        publicDownloadNumbers = true
+        publish = true
+        version {
+            name = 'jtwig-render-extension-' + project.version
+            desc = 'Jtwig : Modern Template Engine for Java'
+            vcsTag = "jtwig-render-extension-" + project.version
+        }
+    }
+}
