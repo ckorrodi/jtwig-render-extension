@@ -9,7 +9,7 @@ import org.jtwig.parser.parboiled.base.SpacingParser;
 import org.jtwig.parser.parboiled.expression.AnyExpressionParser;
 import org.jtwig.parser.parboiled.model.Keyword;
 import org.jtwig.parser.parboiled.node.AddonParser;
-import org.jtwig.web.parser.model.RenderNode;
+import org.jtwig.render.model.RenderNode;
 import org.parboiled.Rule;
 
 public class RenderNodeParser extends AddonParser {
