@@ -1,7 +1,7 @@
 package org.jtwig.render.node;
 
+import org.jtwig.escape.NoneEscapeEngine;
 import org.jtwig.render.RenderRequest;
-import org.jtwig.render.context.model.EscapeMode;
 import org.jtwig.render.model.RenderNode;
 import org.jtwig.render.node.renderer.NodeRender;
 import org.jtwig.renderable.Renderable;
@@ -44,7 +44,7 @@ public class RenderNodeRender implements NodeRender<RenderNode> {
 
         try {
             httpServletRequest.getRequestDispatcher(path).include(httpServletRequest, response);
-            return new StringRenderable(new String(response.getContent()), EscapeMode.NONE);
+            return new StringRenderable(new String(response.getContent()), NoneEscapeEngine.instance());
         } catch (ServletException | IOException e) {
             throw new IllegalArgumentException(ErrorMessageFormatter.errorMessage(node.getPosition(), "Unable to render"), e);
         }

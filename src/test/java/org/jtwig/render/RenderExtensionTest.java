@@ -63,7 +63,7 @@ public class RenderExtensionTest {
 
     public static class HelloServlet extends HttpServlet {
         private final JtwigRenderer renderer = new JtwigRenderer(EnvironmentConfigurationBuilder.configuration()
-                .withExtension(new RenderExtension())
+                .extensions().add(new RenderExtension()).and()
                 .build());
 
         @Override
@@ -76,7 +76,7 @@ public class RenderExtensionTest {
 
     public static class RenderServlet extends HttpServlet {
         private final JtwigRenderer renderer = new JtwigRenderer(EnvironmentConfigurationBuilder.configuration()
-                .withExtension(new RenderExtension())
+                .extensions().add(new RenderExtension()).and()
                 .build());
 
         @Override

@@ -9,7 +9,7 @@ import org.jtwig.render.node.RenderNodeRender;
 public class RenderExtension implements Extension {
     @Override
     public void configure(EnvironmentConfigurationBuilder configurationBuilder) {
-        configurationBuilder.parser().withAddonParserProvider(new RenderNodeAddonProvider())
-            .and().render().withRender(RenderNode.class, new RenderNodeRender());
+        configurationBuilder.parser().addonParserProviders().add(new RenderNodeAddonProvider()).and()
+            .and().render().nodeRenders().add(RenderNode.class, new RenderNodeRender());
     }
 }
