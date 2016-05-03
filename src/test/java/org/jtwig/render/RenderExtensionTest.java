@@ -31,7 +31,7 @@ public class RenderExtensionTest {
         server = new Server(0);
         ServletContextHandler context = new ServletContextHandler();
         context.setContextPath("/");
-        context.setBaseResource(new FileResource(new File("src/main/webapp").getAbsoluteFile().toURI().toURL()));
+        context.setBaseResource(new FileResource(new File("src/test/webapp").getAbsoluteFile().toURI().toURL()));
 
         context.addServlet(new ServletHolder(new HelloServlet()), "/hello");
         context.addServlet(new ServletHolder(new RenderServlet()), "/render");
@@ -57,7 +57,7 @@ public class RenderExtensionTest {
         String content = Request.Get(String.format("%s/render", serverUrl()))
                 .execute().returnContent().asString();
 
-        assertThat(content, is("Hello World"));
+        assertThat(content, is("Hello World Jtwig"));
     }
 
 
@@ -68,11 +68,10 @@ public class RenderExtensionTest {
 
         @Override
         protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            renderer.inlineDispatcherFor("World")
+            renderer.inlineDispatcherFor("World {{ name }}")
                     .render(request, response);
         }
     }
-
 
     public static class RenderServlet extends HttpServlet {
         private final JtwigRenderer renderer = new JtwigRenderer(EnvironmentConfigurationBuilder.configuration()
@@ -81,7 +80,7 @@ public class RenderExtensionTest {
 
         @Override
         protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            renderer.inlineDispatcherFor("Hello {% render '/hello' %}")
+            renderer.inlineDispatcherFor("Hello {% render '/hello' with {name: 'Jtwig'} %}")
                     .render(request, response);
         }
     }
